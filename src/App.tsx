@@ -1,6 +1,7 @@
 import BudgetForm from "./components/BudgetForm"
 
 function App() {
+
   return (
     <>
       <header className="bg-blue-600 py-8 mx-h-872">
@@ -9,7 +10,7 @@ function App() {
         </h1>
       </header>
       <div className="max-w-3xl mx-auto bg-white shadow-lg rounded-lg mt-10 p-10">
-        <BudgetForm />
+        <BudgetForm/>
       </div>
     </>
   )
