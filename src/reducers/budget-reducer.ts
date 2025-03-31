@@ -9,7 +9,8 @@ export type BudgetAction =
     { type: 'add-expense', payload: { expense: DraftExpense } } |
     { type: 'delete-expense', payload: { id: Expense['id'] } } |
     { type: 'get-expense-by-id', payload: { id: Expense['id'] } } |
-    { type: 'update-expense', payload: { expense: Expense } }
+    { type: 'update-expense', payload: { expense: Expense } } |
+    { type: 'reset-app' }
 
 
 
@@ -111,6 +112,17 @@ export const budgetReducer = (
         return {
             ...state,
             expenses: state.expenses.map(expense => expense.id === action.payload.expense.id ? action.payload.expense : expense),
+            showModal: false,
+            editingId: ''
+        }
+    }
+
+    // Restablecer presupuesto
+    if(action.type === 'reset-app') {
+        return {
+            ...state,
+            budget: 0,
+            expenses: [],
             showModal: false,
             editingId: ''
         }
