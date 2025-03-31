@@ -3,7 +3,7 @@ import { budgetReducer, BudgetState, initialState, BudgetAction } from "../reduc
 
 // Contexto
 type BudgetContextProps = {
-    state: BudgetState | null
+    state: BudgetState
     dispatch: Dispatch<BudgetAction>
 }
 

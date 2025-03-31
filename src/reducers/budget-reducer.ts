@@ -14,6 +14,7 @@ export type BudgetState = {
     expenses: Expense[]
 }
 
+//Crear gasto con uuid
 const createExpense = (draftExpense: DraftExpense) : Expense =>{
     return {
         ...draftExpense,
@@ -28,6 +29,7 @@ export const initialState: BudgetState = {
     expenses: []
 }
 
+//Reducer
 export const budgetReducer = (
     state: BudgetState = initialState,
     action: BudgetAction
@@ -63,7 +65,8 @@ export const budgetReducer = (
         const expense = createExpense(action.payload.expense)
         return {
             ...state,
-            expenses : [...state.expenses, expense]
+            expenses : [...state.expenses, expense],
+            showModal: false
         }
     }
     

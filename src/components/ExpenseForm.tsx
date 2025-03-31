@@ -54,6 +54,14 @@ export default function ExpenseForm() {
             type: 'add-expense',
             payload: { expense }
         })
+
+        //resetear el formulario
+        setExpense({
+            amount: 0,
+            expenseName: '',
+            category: '',
+            date: new Date(),
+        })
     }
 
 
@@ -76,8 +84,8 @@ export default function ExpenseForm() {
                     className="border-2 border-gray-300 rounded-md p-2"
                     placeholder="Añade el nombre del gasto"
                     name="expenseName"
-                    value={expense.expenseName}
                     onChange={handleChange}
+                    value={expense.expenseName}
                 />
             </div>
             <div className="flex flex-col gap-2">

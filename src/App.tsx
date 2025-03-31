@@ -3,6 +3,8 @@ import BudgetTracker from "./components/BudgetTracker"
 import { useBudget } from "./hooks/useBudget"
 import { useMemo } from "react"
 import ExpenseModal from "./components/ExpenseModal"
+import ExpenseList from "./components/ExpenseList"
+
 function App() {
 
   const {state} = useBudget()
@@ -27,6 +29,7 @@ function App() {
       </div>
       {isValidBudget && (
         <main className="max-w-3xl mx-auto py-10">
+          <ExpenseList/>
           <ExpenseModal/>
         </main>
       )}
