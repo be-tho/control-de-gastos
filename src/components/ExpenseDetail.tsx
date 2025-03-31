@@ -15,15 +15,16 @@ export default function ExpenseDetail({expense}: ExpenseDetailProps) {
     const { dispatch } = useBudget()
     //buscar categoria
     const categoryInfo = useMemo(() => categories.filter(cat => cat.id === expense.category)[0], [expense])
-
+    
     const leadingActions = () =>{
         return (
             <LeadingActions>
                 <SwipeAction 
-                    onClick={() => {}}
-                    destructive={true}
+                    onClick={() => dispatch({ type: 'get-expense-by-id', payload: { id: expense.id} })}
                 >
-                    Actualizar
+                    <div className="text-white text-center uppercase text-xl">
+                        Actualizar
+                    </div>
                 </SwipeAction>
             </LeadingActions>
         )
@@ -36,7 +37,9 @@ export default function ExpenseDetail({expense}: ExpenseDetailProps) {
                     destructive={true}
                     onClick={() => dispatch({ type: 'delete-expense', payload: { id: expense.id} })}
                 >
-                    Eliminar
+                    <div className="text-white text-center uppercase text-xl">
+                        Eliminar
+                    </div>
                 </SwipeAction>
             </TrailingActions>
         );
