@@ -5,7 +5,7 @@ import 'react-date-picker/dist/DatePicker.css';
 import 'react-calendar/dist/Calendar.css';
 import { DraftExpense, Value } from "../assets/types";
 import ErrorMessage from "./ErrorMessage";
-import { useBudget, totalExpenses, remainigBudget } from "../hooks/useBudget";
+import { useBudget} from "../hooks/useBudget";
 
 export default function ExpenseForm() {
 
