@@ -5,7 +5,7 @@ import 'react-date-picker/dist/DatePicker.css';
 import 'react-calendar/dist/Calendar.css';
 import { DraftExpense, Value } from "../assets/types";
 import ErrorMessage from "./ErrorMessage";
-import { useBudget } from "../hooks/useBudget";
+import { useBudget, totalExpenses, remainigBudget } from "../hooks/useBudget";
 
 export default function ExpenseForm() {
 
@@ -17,13 +17,15 @@ export default function ExpenseForm() {
     })
 
     const [error, setError] = useState('')
+    const [previusAmount, setPreviusAmount] = useState(0)
 
-    const { dispatch, state } = useBudget()
+    const { dispatch, state, remainigBudget } = useBudget()
 
     useEffect(() => {
         if(state.editingId){
             const editingExpense = state.expenses.filter( currenteExpense => currenteExpense.id === state.editingId)[0]
             setExpense(editingExpense)
+            setPreviusAmount(editingExpense.amount)
         }
     }, [state.editingId])
 
@@ -56,6 +58,12 @@ export default function ExpenseForm() {
             return
         }
 
+        //validar que no me pase del limite
+        if(expense.amount - previusAmount > remainigBudget) {
+            setError('No puedes gastar más de lo que tienes disponible')
+            return
+        }
+
         //agregar gasto o actualizar gasto
         if(state.editingId) {
             dispatch({ type: 'update-expense', payload: {expense : {id : state.editingId, ...expense} } })
@@ -70,6 +78,8 @@ export default function ExpenseForm() {
             category: '',
             date: new Date(),
         })
+
+        setPreviusAmount(0)
     }
 
 
