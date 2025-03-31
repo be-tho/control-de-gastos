@@ -20,12 +20,23 @@ export type BudgetState = {
     editingId: Expense['id']
 }
 
+const initialBudget = () : number => {
+    const localStorageBudget = localStorage.getItem('budget')
+    return localStorageBudget ? Number(localStorageBudget) : 0
+}
+
+const localStorageExpenses = () : Expense[] => {
+    const localStorageExpenses = localStorage.getItem('expenses')
+    return localStorageExpenses ? JSON.parse(localStorageExpenses) : []
+}
+
 export const initialState: BudgetState = {
-    budget: 0,
+    budget: initialBudget(),
     showModal: false,
-    expenses: [],
+    expenses: localStorageExpenses(),
     editingId: ''
 }
+
 
 //Crear gasto con uuid
 const createExpense = (draftExpense: DraftExpense) : Expense =>{
