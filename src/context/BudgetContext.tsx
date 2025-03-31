@@ -12,23 +12,21 @@ type BudgetProviderProps = {
     children: ReactNode
 }
 
-// Crear el contexto
-export const BudgetContext = createContext<BudgetContextProps>(null!)
+// Crear el contexto con valor inicial
+const initialContext: BudgetContextProps = {
+    state: initialState,
+    dispatch: () => null
+}
+
+export const BudgetContext = createContext<BudgetContextProps>(initialContext)
 
 // Crear el provider
-export const BudgetProvider = ({ children }: BudgetProviderProps) =>{
-    
-    // Reducer
-    const [state, dispatch] = useReducer(budgetReducer, initialState)
+export const BudgetProvider = ({ children }: BudgetProviderProps) => {
+    // Explicitly type the state to ensure it's never undefined
+    const [state, dispatch] = useReducer(budgetReducer, initialState) as [BudgetState, Dispatch<BudgetAction>]
 
-    // Retornar el provider
     return (
-        <BudgetContext.Provider
-            value={{
-                state: state || null,
-                dispatch
-            }}
-        >
+        <BudgetContext.Provider value={{ state, dispatch }}>
             {children}
         </BudgetContext.Provider>
     )
